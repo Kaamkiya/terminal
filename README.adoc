@@ -1,0 +1,11 @@
+= My terminal
+
+This is an SSH server you can connect to.
+A little like a website, but using a terminal and SSH instead.
+You can use this same template to make your own, if you want.
+
+
+== License
+
+This project is licensed under the MIT license.
+
