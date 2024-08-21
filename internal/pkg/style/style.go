@@ -12,6 +12,7 @@ type Style struct {
 	Red lipgloss.Style
 	Green lipgloss.Style
 	Blue lipgloss.Style
+	Gray lipgloss.Style
 }
 
 func GetStyles(session ssh.Session) Style {
@@ -23,5 +24,6 @@ func GetStyles(session ssh.Session) Style {
 		Red: rend.NewStyle().Foreground(lipgloss.Color("#ed2828")),
 		Green: rend.NewStyle().Foreground(lipgloss.Color("#14e87e")),
 		Blue: rend.NewStyle().Foreground(lipgloss.Color("#147ee8")),
+		Gray: rend.NewStyle().Foreground(lipgloss.Color("#aaaaaa")),
 	}
 }
