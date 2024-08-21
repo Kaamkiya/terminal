@@ -18,7 +18,6 @@ const (
 )
 
 func Run() {
-	styles := style.GetStyles()
 
 	server, err := wish.NewServer(
 		wish.WithAddress(net.JoinHostPort(host, port)),
@@ -27,6 +26,7 @@ func Run() {
 			func(next ssh.Handler) ssh.Handler {
 				return func(session ssh.Session) {
 					wish.Println(session, "Welcome to my terminal!")
+					styles := style.GetStyles(session)
 					commands.CommandLine(session, styles)
 				}
 			},

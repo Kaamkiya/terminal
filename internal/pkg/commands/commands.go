@@ -16,8 +16,9 @@ func CommandLine(session ssh.Session, style style.Style) {
 	prompt := fmt.Sprintf(
 		"%s@%s$ ",
 		style.Green.Render(session.User()),
-		style.Blue.Render(session.LocalAddr()),
+		style.Blue.Render(session.LocalAddr().String()),
 	)
+	fmt.Println(style.Green.Render(session.User()))
 	terminal := term.NewTerminal(session, prompt)
 
 	for {
