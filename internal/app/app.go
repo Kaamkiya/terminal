@@ -25,8 +25,8 @@ func Run() {
 		wish.WithMiddleware(
 			func(next ssh.Handler) ssh.Handler {
 				return func(session ssh.Session) {
-					wish.Println(session, "Welcome to my terminal!")
 					styles := style.GetStyles(session)
+					wish.Println(session, styles.Green.Render("Welcome to my terminal!"))
 					commands.CommandLine(session, styles)
 				}
 			},
