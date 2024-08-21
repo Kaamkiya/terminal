@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"io"
+	"time"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
@@ -12,13 +13,15 @@ import (
 	"golang.org/x/term"
 )
 
-func CommandLine(session ssh.Session, style style.Style) {
+func CommandLine(session ssh.Session, styles style.Style) {
+	joinTime := time.Now()
+
 	prompt := fmt.Sprintf(
 		"%s@%s$ ",
-		style.Green.Render(session.User()),
-		style.Blue.Render(session.LocalAddr().String()),
+		styles.Green.Render(session.User()),
+		styles.Blue.Render(session.LocalAddr().String()),
 	)
-	fmt.Println(style.Green.Render(session.User()))
+
 	terminal := term.NewTerminal(session, prompt)
 
 	for {
@@ -38,16 +41,16 @@ func CommandLine(session ssh.Session, style style.Style) {
 		case "about":
 			aboutCmd(session)
 		case "projects":
-			projectsCmd(session)
+			projectsCmd(session, styles)
 		case "exit":
 			fmt.Fprintln(session, "Have a nice day :)")
 			return
 		case "stats":
-			statsCmd(session)
-		//case "uptime":
-			//uptimeCmd(session)
+			statsCmd(session, joinTime)
+		case "help":
+			helpCmd(session, styles)
 		default:
-			fmt.Fprintln(session, "Invalid command. Type help for a list of commands.")
+			fmt.Fprintln(session, styles.Red.Render("Invalid command. Type help for a list of commands."))
 		}
 	}
 }

@@ -2,14 +2,15 @@ package commands
 
 import (
 	"fmt"
-	"strings"
 	"encoding/json"
 	"io"
 	"time"
 	"net/http"
-	"text/tabwriter"
+
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
 	"github.com/charmbracelet/ssh"
+	"github.com/charmbracelet/lipgloss/table"
 )
 
 type repo struct {
@@ -83,7 +84,7 @@ type repo struct {
 	Topics                        []string    `json:"topics"`
 }
 
-func projectsCmd(session ssh.Session) {
+func projectsCmd(session ssh.Session, styles style.Style) {
 	apiURL := "https://codeberg.org/api/v1/users/Kaamkiya/repos"
 
 	repos := []repo{}
@@ -107,21 +108,23 @@ func projectsCmd(session ssh.Session) {
 		return
 	}
 
-	header := []string{"Name", "Last update", "Language", "URL"}
-	repos = repos[0:5]
+	headers := []string{"Name", "Last update", "Description", "Language", "URL"}
+	data := [][]string{}
 
-	tw := tabwriter.NewWriter(session, 8, 8, 4, '\t', 0)
-	
-	fmt.Fprintln(tw, strings.Join(header, "\t"))
-	
 	for _, repo := range repos {
-		fmt.Fprintln(tw, fmt.Sprintf(
-			"%s\t%s\t%s\t%s",
-			repo.Name,
+		data = append(data, []string{
+			styles.Green.Render(repo.FullName),
 			repo.UpdatedAt.Format("2006/02/01"),
+			repo.Description,
 			repo.Language,
 			repo.HTMLURL,
-		))
+		})
 	}
-	tw.Flush()
+
+	t := table.New().
+		Headers(headers...).
+		Rows(data...).
+		Render()
+
+	fmt.Fprintln(session, t)
 }
