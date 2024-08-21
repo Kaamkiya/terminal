@@ -1,18 +1,18 @@
 package style
 
 import (
-	"github.com/charmbracelet/ssh"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/ssh"
 
 	"github.com/muesli/termenv"
 )
 
 type Style struct {
 	Renderer *lipgloss.Renderer
-	Red lipgloss.Style
-	Green lipgloss.Style
-	Blue lipgloss.Style
-	Gray lipgloss.Style
+	Red      lipgloss.Style
+	Green    lipgloss.Style
+	Blue     lipgloss.Style
+	Gray     lipgloss.Style
 }
 
 func GetStyles(session ssh.Session) Style {
@@ -21,9 +21,9 @@ func GetStyles(session ssh.Session) Style {
 
 	return Style{
 		Renderer: rend,
-		Red: rend.NewStyle().Foreground(lipgloss.Color("#ed2828")),
-		Green: rend.NewStyle().Foreground(lipgloss.Color("#14e87e")),
-		Blue: rend.NewStyle().Foreground(lipgloss.Color("#147ee8")),
-		Gray: rend.NewStyle().Foreground(lipgloss.Color("#aaaaaa")),
+		Red:      rend.NewStyle().Foreground(lipgloss.Color("#ed2828")),
+		Green:    rend.NewStyle().Foreground(lipgloss.Color("#14e87e")),
+		Blue:     rend.NewStyle().Foreground(lipgloss.Color("#147ee8")),
+		Gray:     rend.NewStyle().Foreground(lipgloss.Color("#aaaaaa")),
 	}
 }

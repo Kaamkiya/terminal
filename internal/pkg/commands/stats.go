@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 	"time"
-	
+
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
 	"github.com/charmbracelet/ssh"
@@ -16,12 +16,12 @@ func statsCmd(session ssh.Session, joinTime time.Time, styles style.Style) {
 		styles.Gray.Render("User:"),
 		session.User(),
 	)
-	
+
 	// Print the user's public key, or "no public key used" if they don't have one.
 	if session.PublicKey() != nil {
 		fmt.Fprintln(
-			session, 
-			styles.Gray.Render("SSH public key type:"), 
+			session,
+			styles.Gray.Render("SSH public key type:"),
 			session.PublicKey().Type(),
 		)
 		fmt.Fprintln(
@@ -36,7 +36,7 @@ func statsCmd(session ssh.Session, joinTime time.Time, styles style.Style) {
 			"no public key used",
 		)
 	}
-	
+
 	// Print environment variables.
 	fmt.Fprintln(
 		session,

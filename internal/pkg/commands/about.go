@@ -41,9 +41,9 @@ More stuff about me:
           stack TypeScript using Deno and Fresh (%dy).
 - Favorite coding language: Go. I don't know why, I just really love it.
 `,
-		year-2023,
-		year-2022,
-		year-2023,
+			year-2023,
+			year-2022,
+			year-2023,
 		),
 	)
 }

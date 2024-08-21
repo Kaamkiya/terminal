@@ -5,19 +5,19 @@ import (
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
-	"github.com/charmbracelet/ssh"
 	"github.com/charmbracelet/lipgloss/table"
+	"github.com/charmbracelet/ssh"
 )
 
 func helpCmd(session ssh.Session, styles style.Style) {
 	headers := []string{"Name", "Description"}
-	
+
 	commands := map[string]string{
-		"about": "some stuff about me",
+		"about":    "some stuff about me",
 		"projects": "my top 5 most recent codeberg repos",
-		"stats": "show some statistics about you",
-		"help": "show this help message",
-		"exit": "leave the terminal session",
+		"stats":    "show some statistics about you",
+		"help":     "show this help message",
+		"exit":     "leave the terminal session",
 	}
 	rows := [][]string{}
 
@@ -32,6 +32,6 @@ func helpCmd(session ssh.Session, styles style.Style) {
 		Headers(headers...).
 		Rows(rows...).
 		Render()
-	
+
 	fmt.Fprintln(session, t)
 }

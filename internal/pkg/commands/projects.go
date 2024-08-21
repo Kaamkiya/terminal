@@ -1,21 +1,21 @@
 package commands
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"io"
-	"time"
 	"net/http"
+	"time"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
-	"github.com/charmbracelet/ssh"
 	"github.com/charmbracelet/lipgloss/table"
+	"github.com/charmbracelet/ssh"
 )
 
 type repo struct {
-	ID    int `json:"id"`
-	Owner interface{} `json:"owner"`
+	ID              int         `json:"id"`
+	Owner           interface{} `json:"owner"`
 	Name            string      `json:"name"`
 	FullName        string      `json:"full_name"`
 	Description     string      `json:"description"`
