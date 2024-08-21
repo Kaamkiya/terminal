@@ -14,7 +14,7 @@ func aboutCmd(session ssh.Session) {
 
 	animate.TypeWriter(
 		session,
-		time.Millisecond,
+		8*time.Millisecond,
 		fmt.Sprintf(`
 Hello! I'm Kaamkiya.
 
@@ -39,7 +39,8 @@ More stuff about me:
 - Human languages: English (fluent), French (fairly fluent), and learning more.
 - Skills: backend and basic web dev in Go (%dy), full stack Python (%dy), full
           stack TypeScript using Deno and Fresh (%dy).
-- Favorite coding language: Go. I don't know why, I just really love it.`,
+- Favorite coding language: Go. I don't know why, I just really love it.
+`,
 		year-2023,
 		year-2022,
 		year-2023,
