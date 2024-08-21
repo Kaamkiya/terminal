@@ -4,17 +4,19 @@ import (
 	"fmt"
 	"io"
 
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
+
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"
 
 	"golang.org/x/term"
 )
 
-func CommandLine(session ssh.Session) {
+func CommandLine(session ssh.Session, style style.Style) {
 	prompt := fmt.Sprintf(
 		"%s@%s$ ",
-		session.User(),
-		session.LocalAddr(),
+		style.Green.Render(session.User()),
+		style.Blue.Render(session.LocalAddr()),
 	)
 	terminal := term.NewTerminal(session, prompt)
 
@@ -39,11 +41,10 @@ func CommandLine(session ssh.Session) {
 		case "exit":
 			fmt.Fprintln(session, "Have a nice day :)")
 			return
-		/*case "stats":
+		case "stats":
 			statsCmd(session)
-		case "uptime":
-			uptimeCmd(session)
-		*/
+		//case "uptime":
+			//uptimeCmd(session)
 		default:
 			fmt.Fprintln(session, "Invalid command. Type help for a list of commands.")
 		}

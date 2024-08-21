@@ -4,6 +4,7 @@ import (
 	"net"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/commands"
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"
@@ -17,6 +18,8 @@ const (
 )
 
 func Run() {
+	styles := style.GetStyles()
+
 	server, err := wish.NewServer(
 		wish.WithAddress(net.JoinHostPort(host, port)),
 		wish.WithHostKeyPath(".ssh/id_ed25519"),
@@ -24,7 +27,7 @@ func Run() {
 			func(next ssh.Handler) ssh.Handler {
 				return func(session ssh.Session) {
 					wish.Println(session, "Welcome to my terminal!")
-					commands.CommandLine(session)
+					commands.CommandLine(session, styles)
 				}
 			},
 			logging.Middleware(),
