@@ -4,13 +4,18 @@ import (
 	"fmt"
 	"time"
 
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/animate"
+
 	"github.com/charmbracelet/ssh"
 )
 
 func aboutCmd(session ssh.Session) {
 	year := time.Now().Year()
 
-	fmt.Fprintf(session, `
+	animate.TypeWriter(
+		session,
+		time.Millisecond,
+		fmt.Sprintf(`
 Hello! I'm Kaamkiya.
 
 I am a human who happens to like coding, reading, and other miscellaneous
@@ -34,5 +39,10 @@ More stuff about me:
 - Human languages: English (fluent), French (fairly fluent), and learning more.
 - Skills: backend and basic web dev in Go (%dy), full stack Python (%dy), full
           stack TypeScript using Deno and Fresh (%dy).
-`, year-2023, year-2022, year-2023)
+- Favorite coding language: Go. I don't know why, I just really love it.`,
+		year-2023,
+		year-2022,
+		year-2023,
+		),
+	)
 }

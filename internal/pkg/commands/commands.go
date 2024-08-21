@@ -46,7 +46,7 @@ func CommandLine(session ssh.Session, styles style.Style) {
 			fmt.Fprintln(session, "Have a nice day :)")
 			return
 		case "stats":
-			statsCmd(session, joinTime)
+			statsCmd(session, joinTime, styles)
 		case "help":
 			helpCmd(session, styles)
 		default:

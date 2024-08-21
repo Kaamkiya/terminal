@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"time"
 	
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
+
 	"github.com/charmbracelet/ssh"
 )
 
-func statsCmd(session ssh.Session, joinTime time.Time) {
+func statsCmd(session ssh.Session, joinTime time.Time, styles style.Style) {
 	// Print the name the user joined as.
 	fmt.Fprintln(
 		session,
-		"User:",
+		styles.Gray.Render("User:"),
 		session.User(),
 	)
 	
@@ -19,18 +21,18 @@ func statsCmd(session ssh.Session, joinTime time.Time) {
 	if session.PublicKey() != nil {
 		fmt.Fprintln(
 			session, 
-			"SSH public key type:", 
+			styles.Gray.Render("SSH public key type:"), 
 			session.PublicKey().Type(),
 		)
 		fmt.Fprintln(
 			session,
-			"SSH public key:",
+			styles.Gray.Render("SSH public key:"),
 			string(session.PublicKey().Marshal()),
 		)
 	} else {
 		fmt.Fprintln(
 			session,
-			"SSH public key:",
+			styles.Gray.Render("SSH public key:"),
 			"no public key used",
 		)
 	}
@@ -38,21 +40,21 @@ func statsCmd(session ssh.Session, joinTime time.Time) {
 	// Print environment variables.
 	fmt.Fprintln(
 		session,
-		"Environment:",
+		styles.Gray.Render("Environment:"),
 		session.Environ(),
 	)
 
 	// Print the IP the user connected from.
 	fmt.Fprintln(
 		session,
-		"Connected from:",
+		styles.Gray.Render("Connected from:"),
 		session.RemoteAddr().String(),
 	)
 
 	// Print the amount of time the user has been connected.
 	fmt.Fprintln(
 		session,
-		"Time connected:",
+		styles.Gray.Render("Time connected:"),
 		time.Since(joinTime).String(),
 	)
 }
