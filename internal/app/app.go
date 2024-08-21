@@ -3,6 +3,8 @@ package app
 import (
 	"net"
 
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/commands"
+
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"
 	"github.com/charmbracelet/wish"
@@ -22,6 +24,7 @@ func Run() {
 			func(next ssh.Handler) ssh.Handler {
 				return func(session ssh.Session) {
 					wish.Println(session, "Welcome to my terminal!")
+					commands.CommandLine(session)
 				}
 			},
 			logging.Middleware(),
