@@ -2,9 +2,12 @@ package app
 
 import (
 	"net"
+	"errors"
+	"strconv"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/commands"
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/conf"
 
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"
@@ -12,15 +15,12 @@ import (
 	"github.com/charmbracelet/wish/logging"
 )
 
-const (
-	host = "localhost"
-	port = "18187"
-)
-
 func Run() {
+	config := conf.LoadConfig("config.yaml")
+	hostURL := net.JoinHostPort(config.Host, strconv.Itoa(config.Port))
 
 	server, err := wish.NewServer(
-		wish.WithAddress(net.JoinHostPort(host, port)),
+		wish.WithAddress(hostURL),
 		wish.WithHostKeyPath(".ssh/id_ed25519"),
 		wish.WithMiddleware(
 			func(next ssh.Handler) ssh.Handler {
@@ -32,17 +32,15 @@ func Run() {
 			},
 			logging.Middleware(),
 		),
-		wish.WithBanner(getBanner()),
+		wish.WithBanner(getBanner(config.BannerPath)),
+		wish.WithIdleTimeout(config.IdleTimeout),
 	)
 	if err != nil {
 		log.Error("Failed to start server", "error", err)
 	}
 
-	if err = server.ListenAndServe(); err != nil {
-		if err == ssh.ErrServerClosed {
-			log.Info("Server closed")
-		} else {
-			log.Error("Failed to start server", "error", err)
-		}
+	log.Info("Server started on "+hostURL)
+	if err = server.ListenAndServe(); err != nil && !errors.Is(err, ssh.ErrServerClosed) {
+		log.Error("Failed to start server", "error", err)
 	}
 }

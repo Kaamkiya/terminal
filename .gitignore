@@ -9,3 +9,4 @@ go.work
 /terminal
 banner.txt
 .ssh/
+config.yaml

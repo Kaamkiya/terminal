@@ -1,0 +1,27 @@
+# String. Hostname that you want the server to be reachable at. The default is
+# localhost for testing, but you *need* to change it when running in production
+# or your server will not work at all.
+# Examples: ["blue.green.red", "cmyk.dev", "localhost"]
+# Default: "localhost"
+host: "localhost"
+
+# Int. Port for the server to listen at. You'll usually want to set this to 22
+# in production, because it is the default SSH port. Some devices may not allow
+# binding to port 22 locally, so you might need to set it to something else.
+# Examples: [18187, 65535, 786]
+# Default: 22
+port: 22
+
+# String. Path to the banner you want to use for your server. A banner is what
+# users see when they connect. Your banner can be anything. (See the example in
+# banner.example.txt.)
+# Leave this empty for no banner.
+# Examples: ["banner.txt", "banner", "introduction_ascii.txt"]
+# Default: "banner.txt"
+banner_path: "banner.txt"
+
+# String. Time to allow a connection to be idle before closing it. Set this to
+# 0 for no idle timeout.
+# Examples: ["3h", "1h1m3s", "4444s"]
+# Default: "15m"
+idle_timeout: "15m"

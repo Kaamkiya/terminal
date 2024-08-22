@@ -9,6 +9,7 @@ require (
 	github.com/charmbracelet/wish v1.4.2
 	github.com/muesli/termenv v0.15.3-0.20240509142007-81b8f94111d5
 	golang.org/x/term v0.23.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
