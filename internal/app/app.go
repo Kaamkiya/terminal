@@ -1,13 +1,13 @@
 package app
 
 import (
-	"net"
 	"errors"
+	"net"
 	"strconv"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/commands"
-	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/conf"
+	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"
@@ -39,7 +39,7 @@ func Run() {
 		log.Error("Failed to start server", "error", err)
 	}
 
-	log.Info("Server started on "+hostURL)
+	log.Info("Server started on " + hostURL)
 	if err = server.ListenAndServe(); err != nil && !errors.Is(err, ssh.ErrServerClosed) {
 		log.Error("Failed to start server", "error", err)
 	}

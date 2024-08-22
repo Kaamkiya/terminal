@@ -8,9 +8,9 @@ import (
 )
 
 type Config struct {
-	Host string `yaml:"host"`
-	Port int `yaml:"port"`
-	BannerPath string `yaml:"banner_path"`
+	Host        string        `yaml:"host"`
+	Port        int           `yaml:"port"`
+	BannerPath  string        `yaml:"banner_path"`
 	IdleTimeout time.Duration `yaml:"idle_timeout"`
 }
 
