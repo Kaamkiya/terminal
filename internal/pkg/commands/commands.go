@@ -50,6 +50,8 @@ func CommandLine(session ssh.Session, styles style.Style) {
 			return
 		case "stats":
 			statsCmd(session, joinTime, styles)
+		case "contact":
+			contactCmd(session)
 		case "help":
 			helpCmd(session, styles)
 		default:
