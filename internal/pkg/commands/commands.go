@@ -16,13 +16,10 @@ import (
 func CommandLine(session ssh.Session, styles style.Style) {
 	joinTime := time.Now()
 
-	prompt := fmt.Sprintf(
-		"%s@%s$ ",
-		styles.Green.Render(session.User()),
-		styles.Blue.Render(session.LocalAddr().String()),
-	)
-
+	prompt := styles.Green.Render("$ ")
 	terminal := term.NewTerminal(session, prompt)
+	
+	fmt.Fprintf(session, "Welcome, %s!\n\n", styles.Green.Render(session.User()))
 
 	// Just so the user knows what they're doing when they connect.
 	helpCmd(session, styles)
