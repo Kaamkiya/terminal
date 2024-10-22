@@ -35,7 +35,7 @@ Source code: https://codeberg.org/Kaamkiya/terminal
 More stuff about me:
 - Pronouns: he/him
 - Age: somewhere between 10 and 80
-- OS: Linux Mint 22
+- OS: Void Linux
 - Human languages: English (fluent), French (fairly fluent), and learning more.
 - Skills: backend and basic web dev in Go (%dy), full stack Python (%dy), full
           stack TypeScript using Deno and Fresh (%dy).
