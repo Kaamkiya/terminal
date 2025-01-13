@@ -12,6 +12,16 @@ func contactCmd(session ssh.Session) {
 	animate.TypeWriter(
 		session,
 		8*time.Millisecond,
-		"You can reach me on GitHub at https://github.com/Kaamkiya\n",
+		`You can reach me on...
+
+* Github:    Kaamkiya
+* Mastodon:  @nonexistent@hachyderm.io
+* Lemmy:     @kaamkiy@lemmy.ml
+* Hachyderm: kaamkiya
+* Daily.dev: kaamkiya
+* Dev.to:    kaamkiya
+
+My ideal method of contact is Mastdon.
+`,
 	)
 }

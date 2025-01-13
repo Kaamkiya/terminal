@@ -16,14 +16,14 @@ type Style struct {
 }
 
 func GetStyles(session ssh.Session) Style {
-	rend := lipgloss.NewRenderer(session)
-	rend.SetOutput(termenv.NewOutput(session, termenv.WithUnsafe()))
+	r := lipgloss.NewRenderer(session)
+	r.SetOutput(termenv.NewOutput(session, termenv.WithUnsafe()))
 
 	return Style{
-		Renderer: rend,
-		Red:      rend.NewStyle().Foreground(lipgloss.Color("#ed2828")),
-		Green:    rend.NewStyle().Foreground(lipgloss.Color("#14e87e")),
-		Blue:     rend.NewStyle().Foreground(lipgloss.Color("#147ee8")),
-		Gray:     rend.NewStyle().Foreground(lipgloss.Color("#aaaaaa")),
+		Renderer: r,
+		Red:      r.NewStyle().Foreground(lipgloss.Color("#ed2828")),
+		Green:    r.NewStyle().Foreground(lipgloss.Color("#14e87e")),
+		Blue:     r.NewStyle().Foreground(lipgloss.Color("#147ee8")),
+		Gray:     r.NewStyle().Foreground(lipgloss.Color("#aaaaaa")),
 	}
 }

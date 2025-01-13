@@ -1,12 +1,13 @@
-package app
+package main
 
 import (
 	"errors"
+	"time"
 	"net"
+	"flag"
 	"strconv"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/commands"
-	"codeberg.org/Kaamkiya/terminal/internal/pkg/conf"
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
 
 	"github.com/charmbracelet/log"
@@ -15,9 +16,20 @@ import (
 	"github.com/charmbracelet/wish/logging"
 )
 
-func Run() {
-	config := conf.LoadConfig("config.yaml")
-	hostURL := net.JoinHostPort(config.Host, strconv.Itoa(config.Port))
+var (
+	flagHost = flag.String("host", "0.0.0.0", "where to host the server")
+	flagPort = flag.Int("port", 2222, "the port to use")
+	flagIdleTimeout = flag.Duration("idletimeout", 15*time.Minute, "idle timeout for connections")
+)
+
+const banner = `  _        _ _     
+ | |_  ___| | |___ 
+ | ' \/ -_) | / _ \
+ |_||_\___|_|_\___/
+`
+
+func main() {
+	hostURL := net.JoinHostPort(*flagHost, strconv.Itoa(*flagPort))
 
 	server, err := wish.NewServer(
 		wish.WithAddress(hostURL),
@@ -31,8 +43,8 @@ func Run() {
 			},
 			logging.Middleware(),
 		),
-		wish.WithBanner(getBanner(config.BannerPath)),
-		wish.WithIdleTimeout(config.IdleTimeout),
+		wish.WithBanner(banner),
+		wish.WithIdleTimeout(*flagIdleTimeout),
 	)
 	if err != nil {
 		log.Error("Failed to start server", "error", err)
@@ -43,3 +55,4 @@ func Run() {
 		log.Error("Failed to start server", "error", err)
 	}
 }
+
