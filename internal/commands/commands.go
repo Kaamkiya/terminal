@@ -50,7 +50,7 @@ func CommandLine(session ssh.Session, styles style.Style) {
 		case "contact":
 			contactCmd(session)
 		case "help":
-			helpCmd(session, styles)
+			helpCmd(session)
 		default:
 			fmt.Fprintln(session, styles.Red.Render("Invalid command. Type help for a list of commands."))
 		}

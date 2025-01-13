@@ -3,36 +3,18 @@ package commands
 import (
 	"fmt"
 
-	"codeberg.org/Kaamkiya/terminal/internal/style"
-
-	"github.com/charmbracelet/lipgloss/table"
 	"github.com/charmbracelet/ssh"
 )
 
-func helpCmd(session ssh.Session, styles style.Style) {
-	headers := []string{"Name", "Description"}
+func helpCmd(s ssh.Session) {
+	msg := `
+about       some stuff about me"
+projects    projects I'm proud of"
+stats       some statistics about you"
+contact     how to contact me"
+help        show this help message"
+exit        leave the terminal"
+`
 
-	commands := map[string]string{
-		"about":    "some stuff about me",
-		"projects": "my top 5 most recent codeberg repos",
-		"stats":    "show some statistics about you",
-		"contact":  "how to contact me",
-		"help":     "show this help message",
-		"exit":     "leave the terminal session",
-	}
-	rows := [][]string{}
-
-	for cmd, help := range commands {
-		rows = append(rows, []string{
-			styles.Green.Render(cmd),
-			help,
-		})
-	}
-
-	t := table.New().
-		Headers(headers...).
-		Rows(rows...).
-		Render()
-
-	fmt.Fprintln(session, t)
+	fmt.Fprintln(s, msg)
 }
