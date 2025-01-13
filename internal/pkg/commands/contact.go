@@ -2,7 +2,7 @@ package commands
 
 import (
 	"time"
-	
+
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/animate"
 
 	"github.com/charmbracelet/ssh"

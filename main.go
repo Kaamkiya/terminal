@@ -2,10 +2,10 @@ package main
 
 import (
 	"errors"
-	"time"
-	"net"
 	"flag"
+	"net"
 	"strconv"
+	"time"
 
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/commands"
 	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
@@ -17,8 +17,8 @@ import (
 )
 
 var (
-	flagHost = flag.String("host", "0.0.0.0", "where to host the server")
-	flagPort = flag.Int("port", 2222, "the port to use")
+	flagHost        = flag.String("host", "0.0.0.0", "where to host the server")
+	flagPort        = flag.Int("port", 2222, "the port to use")
 	flagIdleTimeout = flag.Duration("idletimeout", 15*time.Minute, "idle timeout for connections")
 )
 
@@ -55,4 +55,3 @@ func main() {
 		log.Error("Failed to start server", "error", err)
 	}
 }
-
