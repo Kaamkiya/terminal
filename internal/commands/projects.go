@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
+	"codeberg.org/Kaamkiya/terminal/internal/style"
 
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/charmbracelet/ssh"

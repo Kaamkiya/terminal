@@ -5,7 +5,7 @@ import (
 	"io"
 	"time"
 
-	"codeberg.org/Kaamkiya/terminal/internal/pkg/style"
+	"codeberg.org/Kaamkiya/terminal/internal/style"
 
 	"github.com/charmbracelet/log"
 	"github.com/charmbracelet/ssh"

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"codeberg.org/Kaamkiya/terminal/internal/pkg/animate"
+	"codeberg.org/Kaamkiya/terminal/internal/animate"
 
 	"github.com/charmbracelet/ssh"
 )
